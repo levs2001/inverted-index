@@ -53,15 +53,17 @@ public class PostingList implements IPostingList {
     @Override
     public long advance(long docId) {
         boolean skipped = false;
-        while (skipBlockInd - 1 < docIdList.skipBlocks().size()) {
-            if (docIdList.skipBlocks().get(skipBlockInd).firstId() > docId) {
+        int curInd = skipBlockInd;
+        while (curInd < docIdList.skipBlocks().size()) {
+            if (docIdList.skipBlocks().get(curInd).firstId() > docId) {
                 break;
             }
-            skipBlockInd++;
             skipped = true;
+            curInd++;
         }
 
         if (skipped) {
+            skipBlockInd = curInd - 1;
             SkipBlock skipBlock = docIdList.skipBlocks().get(skipBlockInd);
             currentId = skipBlock.firstId();
             excInd = skipBlock.excFirstInd();
@@ -72,5 +74,18 @@ public class PostingList implements IPostingList {
             result = next();
         }
         return result;
+    }
+
+    @Override
+    public int size() {
+        return docIdList.size();
+    }
+
+    @Override
+    public void reset() {
+        currentId = 0;
+        nextInd = 0;
+        excInd = 0;
+        skipBlockInd = 0;
     }
 }

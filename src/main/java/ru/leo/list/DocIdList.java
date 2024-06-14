@@ -3,6 +3,7 @@ package ru.leo.list;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.BitSet;
+import java.util.Collection;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
@@ -17,7 +18,7 @@ import ru.leo.util.MathUtils;
  * @param deltaCodeMap
  * @param exceptions
  */
-public record DocIdList(int size, int skipListSize, List<SkipBlock> skipBlocks, IDeltasCompressed deltasCompressed,
+public record DocIdList(int size, List<SkipBlock> skipBlocks, IDeltasCompressed deltasCompressed,
                         Map<BitSet, Long> deltaCodeMap,
                         List<Long> exceptions) {
     private static final int SKIP_LIST_SIZE = 128;
@@ -27,7 +28,15 @@ public record DocIdList(int size, int skipListSize, List<SkipBlock> skipBlocks, 
         return new PostingList(this);
     }
 
-    public static DocIdList create(List<Long> ids) {
+    public static DocIdList create(Collection<Long> ids) {
+        if (ids.size() == 1) {
+            return new DocIdList(
+                1,
+                List.of(SkipBlock.create(ids.stream().findFirst().get(), 0)),
+                null, null, null
+            );
+        }
+
         List<Long> idsSorted = ids.stream().sorted().toList();
 
         long[] deltas = getDeltas(idsSorted);
@@ -66,10 +75,14 @@ public record DocIdList(int size, int skipListSize, List<SkipBlock> skipBlocks, 
         IDeltasCompressed deltasCompressed = new DeltasCompressed(deltaBits, realBitsSize, deltasBs);
         Map<BitSet, Long> deltaCodeMap = new HashMap<>(codeMap.size());
         codeMap.keySet().stream().filter(k -> k != EXC_DELTA).forEach(k -> deltaCodeMap.put(codeMap.get(k), k));
-        return new DocIdList(idsSorted.size(), SKIP_LIST_SIZE, skipBlocks, deltasCompressed, deltaCodeMap, exceptions);
+        return new DocIdList(idsSorted.size(), skipBlocks, deltasCompressed, deltaCodeMap, exceptions);
     }
 
     private static Map<Long, BitSet> makeCodeMap(Set<Long> toCode, int bitsCount) {
+        if (toCode.isEmpty()) {
+            return Map.of(EXC_DELTA, MathUtils.bitsFromInt(1, 0));
+        }
+
         Map<Long, BitSet> result = new HashMap<>();
         Long[] arr = toCode.toArray(new Long[0]);
         for (int i = 0; i < arr.length; i++) {

@@ -17,10 +17,17 @@ class PostingListTest {
 
     @Test
     public void testUnorderedSimple() {
-        List<Long> idsOrd = List.of(10L, 6L, 3L);
-        IPostingList postingList = DocIdList.create(idsOrd).iterator();
-        List<Long> expectedSorted = idsOrd.stream().sorted().toList();
+        List<Long> ids = List.of(10L, 6L, 3L);
+        IPostingList postingList = DocIdList.create(ids).iterator();
+        List<Long> expectedSorted = ids.stream().sorted().toList();
         assertEquals(expectedSorted, fromPostingList(postingList));
+    }
+
+    @Test
+    public void testOneElementList() {
+        List<Long> ids = List.of(10L);
+        IPostingList postingList = DocIdList.create(ids).iterator();
+        assertEquals(ids, fromPostingList(postingList));
     }
 
     @Test
@@ -47,6 +54,7 @@ class PostingListTest {
     }
 
     List<Long> fromPostingList(IPostingList postingList) {
+        postingList.reset();
         List<Long> ids = new ArrayList<>();
         while (postingList.hasNext()) {
             ids.add(postingList.next());

@@ -14,4 +14,11 @@ public interface IPostingList {
     long current();
 
     long advance(long docId);
+
+    int size();
+
+    /**
+     * always reset before use.
+     */
+    void reset();
 }

@@ -2,8 +2,8 @@ package ru.leo.index;
 
 import java.util.List;
 import ru.leo.doc.Document;
+import ru.leo.expression.Expression;
 
 public interface IInvertedIndex {
-    // TODO: Нужен булев поиск
-    List<Document> find(String term);
+    List<Long> find(Expression expression);
 }
