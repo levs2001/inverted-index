@@ -1,4 +1,4 @@
-package ru.leo.expression;
+package ru.leo.search.expression;
 
 public class ExpressionTerm extends Expression {
     private final String term;

@@ -1,17 +1,16 @@
-package ru.leo.index;
+package ru.leo.search.index;
 
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
 import java.util.Map;
-import ru.leo.doc.Document;
-import ru.leo.expression.Expression;
-import ru.leo.expression.ExpressionAnd;
-import ru.leo.expression.ExpressionNot;
-import ru.leo.expression.ExpressionOr;
-import ru.leo.expression.ExpressionTerm;
-import ru.leo.expression.IExpressionVisitor;
-import ru.leo.list.IPostingList;
+import ru.leo.search.expression.Expression;
+import ru.leo.search.expression.ExpressionAnd;
+import ru.leo.search.expression.ExpressionNot;
+import ru.leo.search.expression.ExpressionOr;
+import ru.leo.search.expression.ExpressionTerm;
+import ru.leo.search.expression.IExpressionVisitor;
+import ru.leo.search.list.IPostingList;
 
 /**
  * Not thread safe!!!

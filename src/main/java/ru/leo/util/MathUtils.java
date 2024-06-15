@@ -1,6 +1,7 @@
 package ru.leo.util;
 
 import java.util.BitSet;
+import java.util.List;
 
 public class MathUtils {
     public static int log2(int x) {
@@ -27,5 +28,13 @@ public class MathUtils {
         }
 
         return bitSet;
+    }
+
+    public static long avg(List<Long> list) {
+        long sum = 0;
+        for (long el : list) {
+            sum += el;
+        }
+        return sum / list.size();
     }
 }

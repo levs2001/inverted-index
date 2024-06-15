@@ -1,12 +1,13 @@
 package ru.leo.search;
 
 import static org.junit.jupiter.api.Assertions.*;
-import static ru.leo.expression.Expression.and;
-import static ru.leo.expression.Expression.term;
+import static ru.leo.search.expression.Expression.and;
+import static ru.leo.search.expression.Expression.term;
 
 import java.util.List;
 import java.util.Map;
 import org.junit.jupiter.api.Test;
+import ru.leo.stats.StatsImpl;
 
 class SearcherTest {
     private static final Map<Long, String> textsBase = Map.of(
@@ -20,7 +21,7 @@ class SearcherTest {
 
     @Test
     public void testBase() {
-        ISearcher searcher = new Searcher();
+        ISearcher searcher = new Searcher(new StatsImpl());
         searcher.index(textsBase);
 
         assertEquals(List.of(1L), searcher.search(term("igrala")));

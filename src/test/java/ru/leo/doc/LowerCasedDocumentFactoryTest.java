@@ -4,6 +4,9 @@ import static org.junit.jupiter.api.Assertions.*;
 
 import java.util.Set;
 import org.junit.jupiter.api.Test;
+import ru.leo.search.doc.Document;
+import ru.leo.search.doc.IDocumentFactory;
+import ru.leo.search.doc.LowerCasedDocumentFactory;
 
 class LowerCasedDocumentFactoryTest {
     @Test

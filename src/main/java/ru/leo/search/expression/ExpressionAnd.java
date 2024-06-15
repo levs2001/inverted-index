@@ -1,4 +1,4 @@
-package ru.leo.expression;
+package ru.leo.search.expression;
 
 public class ExpressionAnd extends ExpressionComposite {
     public ExpressionAnd(Expression[] expressions) {

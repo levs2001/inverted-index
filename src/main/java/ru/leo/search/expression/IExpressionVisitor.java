@@ -1,4 +1,4 @@
-package ru.leo.expression;
+package ru.leo.search.expression;
 
 public interface IExpressionVisitor {
     boolean visitAnd(ExpressionAnd expressionAnd);

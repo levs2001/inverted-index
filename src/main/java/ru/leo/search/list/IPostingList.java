@@ -1,4 +1,4 @@
-package ru.leo.list;
+package ru.leo.search.list;
 
 public interface IPostingList {
     boolean hasNext();

@@ -6,6 +6,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.ThreadLocalRandom;
 import org.junit.jupiter.api.Test;
+import ru.leo.search.list.DocIdList;
+import ru.leo.search.list.IPostingList;
 
 class PostingListTest {
     @Test

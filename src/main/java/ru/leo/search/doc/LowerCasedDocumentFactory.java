@@ -1,4 +1,4 @@
-package ru.leo.doc;
+package ru.leo.search.doc;
 
 import java.util.Arrays;
 import java.util.Set;

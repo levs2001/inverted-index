@@ -1,4 +1,4 @@
-package ru.leo.list;
+package ru.leo.search.list;
 
 import java.util.ArrayList;
 import java.util.Arrays;

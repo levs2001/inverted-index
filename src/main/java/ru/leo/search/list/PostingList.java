@@ -1,4 +1,4 @@
-package ru.leo.list;
+package ru.leo.search.list;
 
 import java.util.BitSet;
 import java.util.NoSuchElementException;
